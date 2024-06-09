@@ -22,3 +22,6 @@ def plot_results(results: list):
     )
 
     fig.show()
+
+    with open("latest_results.html", "w") as file:
+        file.write(fig.to_html())

@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assignment Report: Advanced Algorithms</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="40b287a6-d1f4-4a03-ba63-ea56e6d9d950" class="page sans"><header><h1 class="page-title">Assignment Report: Advanced Algorithms</h1><p class="page-description"></p></header><div class="page-body"><h2 id="fed70609-4a79-4d4f-b042-f3a21165f7e8" class="">Introduction</h2><p id="3e0d81be-5a68-482a-8492-ddaf87649358" class="">The objective of this assignment is to explore and implement various data structures and algorithms for two distinct problems. The first part, &quot;Me Spell Rite,&quot; involves developing a spell checker using multiple approaches and comparing their performance. The second part, &quot;Triwizard Tournament,&quot; requires predicting the winner of a race in a labyrinth using the Breadth-First Search (BFS) algorithm. This report will cover the detailed implementation of each solution, a comparative analysis of the different approaches, and a summary of the findings along with recommendations for future improvements.</p><h2 id="5dd67c25-30d0-4114-b7db-1e59675c7acf" class="">Part One: &quot;Me Spell Rite&quot;</h2><h3 id="f92e4877-d245-4b8b-a472-eb60ae5a98be" class="">Description of the Solution</h3><h3 id="c56ab8d8-4dd6-45a8-92be-586be0b6bb9d" class="">Naive (Linear List) Approach</h3><p id="59e76962-d134-4984-981e-bf8befb54b3a" class="">The naive approach involves storing the dictionary words in a simple list. For spell checking, each word in the text is checked against this list using a linear search. This method is straightforward but inefficient, especially for large datasets.</p><h3 id="d389e2b5-5ad6-4f20-8bb2-f9a9f2beb4f2" class="">Balanced Binary Search Tree (BBST) Approach</h3><p id="7017a092-2b7d-4aeb-aa8e-4aa4407df5fb" class="">The BBST approach uses a balanced binary search tree to store the dictionary words. In Python, this is implemented using the <code>sortedcontainers</code> library, which maintains a sorted list. This allows for faster search operations compared to the naive approach due to the logarithmic time complexity of binary search.</p><h3 id="57651521-567f-474c-bd2c-8d7e8d994b1b" class="">Trie Data Structure</h3><p id="f6ffb1bf-b9ae-48ab-b42c-16abba9388f7" class="">A Trie, or prefix tree, is a specialized tree used to store associative data structures. Each node represents a character of a word, and the path down the tree represents the word itself. This approach is highly efficient for search operations, particularly for prefix-based searches.</p><h3 id="845a1d17-65b4-4bd4-9faa-66fdb24c8ceb" class="">Hash Map Approach</h3><p id="bb639a88-823a-4093-9739-7833b998e62d" class="">The hash map approach uses Python&#x27;s built-in <code>set</code> to store the dictionary words. This data structure allows for average-case constant time complexity for both insertion and search operations, making it highly efficient for the spell-checking task.</p><h3 id="518d76c9-32e7-427b-ba07-09d90f103a0d" class="">Comparative Analysis</h3><h3 id="ceb43962-b93e-44a4-b500-e56237544369" class="">Running Times for Dictionary Building</h3><ul id="b268d0cf-c32f-4932-95be-13a24fcf4c9a" class="bulleted-list"><li style="list-style-type:disc"><strong>Naive Dictionary Load:</strong> 0.0102 seconds</li></ul><ul id="b7773713-10c5-4f3e-9dbc-dbd6f0701ee9" class="bulleted-list"><li style="list-style-type:disc"><strong>BBST Dictionary Load:</strong> 0.0436 seconds</li></ul><ul id="b62a4c69-c953-4ecd-932f-5bcaf3a3f75e" class="bulleted-list"><li style="list-style-type:disc"><strong>Trie Dictionary Load:</strong> 0.1837 seconds</li></ul><ul id="850de178-ef6f-4a35-98d0-d7caeeb10c44" class="bulleted-list"><li style="list-style-type:disc"><strong>HashMap Dictionary Load:</strong> 0.0248 seconds</li></ul><h3 id="a2caeb77-0d17-4887-b08b-5d3876e6662c" class="">Spell-Checking Performance</h3><ul id="eabde7be-9787-45d4-a2e3-37e837a5713c" class="bulleted-list"><li style="list-style-type:disc"><strong>Naive Dictionary Spell Check:</strong> 1.9693 seconds</li></ul><ul id="b9747bc4-ed18-4d2e-bf5f-60adc4e1d18e" class="bulleted-list"><li style="list-style-type:disc"><strong>BBST Dictionary Spell Check:</strong> 0.0008 seconds</li></ul><ul id="169f400e-d097-4b34-9f12-5662d8c14735" class="bulleted-list"><li style="list-style-type:disc"><strong>Trie Dictionary Spell Check:</strong> 0.0018 seconds</li></ul><ul id="e421b648-026f-480d-aed0-44d658da7d2e" class="bulleted-list"><li style="list-style-type:disc"><strong>HashMap Dictionary Spell Check:</strong> 0.0006 seconds</li></ul><h3 id="ff4b2150-3030-4b61-8087-fa38a79e49f8" class="">Results and Graphs</h3><h3 id="62143c90-3881-49d9-942a-79d173560143" class="">Summary of Results</h3><p id="7e283d78-a62a-4cb0-baf3-c6603d9460f0" class="">The table below summarizes the results of the dictionary loading and spell-checking times for each approach:</p><table id="fc61bff6-3650-4bae-8a47-9eda7aceaa14" class="simple-table"><tbody><tr id="0554a057-bde1-4197-8d3e-c624e5fe03d7"><td id="rsMt" class="">Approach</td><td id="bfJT" class="">Dictionary Load Time (s)</td><td id="N]gt" class="">Spell Check Time (s)</td></tr><tr id="ba57f0af-dbc9-4a86-84df-dd059c2787fa"><td id="rsMt" class="">Naive</td><td id="bfJT" class="">0.0102</td><td id="N]gt" class="">1.9693</td></tr><tr id="f3e564aa-4749-4d5a-a8e7-76d176749db8"><td id="rsMt" class="">BBST</td><td id="bfJT" class="">0.0436</td><td id="N]gt" class="">0.0008</td></tr><tr id="d36f7b02-7f50-41a0-9c14-588614c4f676"><td id="rsMt" class="">Trie</td><td id="bfJT" class="">0.1837</td><td id="N]gt" class="">0.0018</td></tr><tr id="3b1f7341-28b6-4c45-ab9d-5de9ae1687c7"><td id="rsMt" class="">HashMap</td><td id="bfJT" class="">0.0248</td><td id="N]gt" class="">0.0006</td></tr></tbody></table><h3 id="229d1f20-97d5-4b3b-bfd6-becc15a5e7cf" class="">Graphs Showing Runtime Performance</h3><p id="92bacdf9-a1ce-4ad8-b237-a6f0a72edc0f" class="">Below is a line chart that visualizes the performance of different approaches for both dictionary loading and spell-checking times:</p><figure id="c2335dca-5495-4427-9624-89ec34f78f3a" class="image"><a href="Assignment%20Report%20Advanced%20Algorithms%2040b287a6d1f44a03ba63ea56e6d9d950/newplot_(7).png"><img style="width:1454px" src="Assignment%20Report%20Advanced%20Algorithms%2040b287a6d1f44a03ba63ea56e6d9d950/newplot_(7).png"/></a></figure><h3 id="7881fb0c-1a29-4b38-89c4-02c064c6cbb5" class="">Pros and Cons of Each Approach</h3><ul id="c4e6555f-3402-4b5f-8579-12c068ac7642" class="bulleted-list"><li style="list-style-type:disc"><strong>Naive Approach:</strong><ul id="509b2d94-38fe-4f88-bfbc-0bad29212a92" class="bulleted-list"><li style="list-style-type:circle"><strong>Pros:</strong> Simple to implement.</li></ul><ul id="2058f30e-8668-494e-b1ae-c9b9e4bdce8f" class="bulleted-list"><li style="list-style-type:circle"><strong>Cons:</strong> Slow for large datasets due to linear search.</li></ul></li></ul><ul id="87cc4d5f-118f-493b-9b26-40a824848dbe" class="bulleted-list"><li style="list-style-type:disc"><strong>BBST Approach:</strong><ul id="6da91f96-51d0-4011-b866-9f2ebb9a45a3" class="bulleted-list"><li style="list-style-type:circle"><strong>Pros:</strong> Faster search times due to binary search.</li></ul><ul id="fe5f806d-1c03-49b2-ac55-8494baf399f4" class="bulleted-list"><li style="list-style-type:circle"><strong>Cons:</strong> Slightly more complex to implement and higher load time compared to naive approach.</li></ul></li></ul><ul id="e9eaac69-c00e-46dc-a8c2-a1325baa50eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Trie Approach:</strong><ul id="3d68a7fd-73bb-4bc5-b5d3-7133ba138449" class="bulleted-list"><li style="list-style-type:circle"><strong>Pros:</strong> Highly efficient for prefix searches and moderate search times.</li></ul><ul id="5a96e47e-7c85-46d7-bbc1-0ee04e8b2e3e" class="bulleted-list"><li style="list-style-type:circle"><strong>Cons:</strong> Higher memory usage and slower load times.</li></ul></li></ul><ul id="06bfdce1-9e5f-480e-9073-6fd6692c2957" class="bulleted-list"><li style="list-style-type:disc"><strong>Hash Map Approach:</strong><ul id="208b54b4-3f8d-48f4-a22b-8c0a9c0103da" class="bulleted-list"><li style="list-style-type:circle"><strong>Pros:</strong> Fastest search times due to constant time complexity.</li></ul><ul id="40fdc7c7-a4fc-4ee2-a0b8-39e0115bb388" class="bulleted-list"><li style="list-style-type:circle"><strong>Cons:</strong> Slightly higher load time compared to naive approach.</li></ul></li></ul><h2 id="f0b8c9ab-5a30-4c3b-a23a-3f3b06b51a03" class="">Part Two: &quot;Triwizard Tournament&quot;</h2><h3 id="1d66883a-e8e3-4b23-9a9b-da5d01241b9b" class="">Description of the Solution</h3><h3 id="d89c8f38-8361-4380-a88a-e10b0704d1ed" class="">Labyrinth Map Representation</h3><p id="263a2534-479a-4653-bdfc-025b6b3f49ff" class="">The labyrinth is represented as an adjacency list where each node (corridor) has a list of its neighboring nodes. For example:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="44289ff7-3dc1-4832-af1f-8b5c72566c03" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">labyrinth = {
+    &#x27;A&#x27;: [&#x27;B&#x27;, &#x27;C&#x27;],
+    &#x27;B&#x27;: [&#x27;D&#x27;, &#x27;E&#x27;],
+    &#x27;C&#x27;: [&#x27;F&#x27;],
+    &#x27;D&#x27;: [],
+    &#x27;E&#x27;: [],
+    &#x27;F&#x27;: [&#x27;E&#x27;]
+}</code></pre><h3 id="9bfe1847-e5b0-4c1a-b571-bd6166a2585a" class="">Initial Positions and Speeds of the Wizards</h3><p id="51a58825-f474-42bb-aaed-2eae692c317b" class="">The initial positions of the wizards and their speeds are defined as follows:</p><ul id="a7aa74a1-285b-4f6b-984c-280d86854b3f" class="bulleted-list"><li style="list-style-type:disc"><strong>Initial Positions:</strong> [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;]</li></ul><ul id="f99ec2d7-f892-4443-a570-6b5744b1f34c" class="bulleted-list"><li style="list-style-type:disc"><strong>Speeds:</strong> [1, 2, 1.5] (in corridors per minute)</li></ul><h3 id="6b4a4abe-b47c-44aa-9cb1-a19214406e8e" class="">Breadth-First Search (BFS) Algorithm</h3><p id="ea0420db-86cd-4191-b75f-7832b7b565cc" class="">The BFS algorithm is used to find the shortest path from each wizard&#x27;s starting position to the exit. BFS explores all neighbors at the present depth prior to moving on to nodes at the next depth level, ensuring the shortest path in an unweighted graph.</p><h3 id="9aeda9fc-d59f-4490-b33b-c7d4674c10bf" class="">Analysis and Findings</h3><h3 id="da3dc857-8855-4c02-89fa-5768ed325359" class="">Application of BFS</h3><p id="b41e491c-ce31-4d11-9f7c-cfeb575d69dd" class="">The BFS algorithm was applied to find the shortest path from each wizard&#x27;s starting position to the exit. The time taken for each wizard to reach the exit was calculated based on their speed and the length of the shortest path.</p><h3 id="38bc85b2-d47d-4f4b-bbdf-0abfd4e709e3" class="">Prediction Results</h3><p id="005a36d3-19ca-4fef-8e61-d46e5474ff9c" class="">The wizard who reaches the exit first is wizard B, given their higher speed and the layout of the labyrinth.</p><h3 id="d9f80037-e890-4fd0-aad7-ee001ae16a7f" class="">Assumptions and Impact</h3><ul id="96efb48e-95b7-4626-a730-554951d316ff" class="bulleted-list"><li style="list-style-type:disc">The wizards move at a constant speed through the corridors.</li></ul><ul id="5a10e555-5c74-4e1c-9094-1f0b07ea5833" class="bulleted-list"><li style="list-style-type:disc">The labyrinth&#x27;s layout is fixed and does not change during the race.</li></ul><h2 id="46357859-2d43-4aed-870b-59b82330d339" class="">Conclusion</h2><h3 id="4a5954af-2c14-457c-a26e-c7d962ff5d57" class="">Summary of Findings</h3><ul id="5bec75c0-d2cd-458d-a773-2adbce6c5ec7" class="bulleted-list"><li style="list-style-type:disc"><strong>Spell Checker:</strong> The Hash Map approach was the fastest for both loading and spell checking. The Trie approach, while efficient for searches, had the highest load time. The Naive approach was the slowest for spell checking.</li></ul><ul id="78b7f3be-7da0-4002-8f6b-eaed760ef538" class="bulleted-list"><li style="list-style-type:disc"><strong>Labyrinth Race:</strong> Wizard B was predicted to reach the exit first due to their higher speed and favorable starting position.</li></ul><h3 id="cd29973f-4bfa-493e-8a54-cc4b7e385986" class="">Recommendations</h3><ul id="01d349ac-6b0d-456e-bfb3-8d0f30f57475" class="bulleted-list"><li style="list-style-type:disc">For large datasets, the Hash Map approach is recommended for spell checking due to its fast search times.</li></ul><ul id="d52a39b3-ee2a-4a88-b075-b44c31570ea0" class="bulleted-list"><li style="list-style-type:disc">Further optimization could be explored for the Trie approach to reduce load times.</li></ul><ul id="f67718a6-1d07-4da9-a19f-dc78858f6953" class="bulleted-list"><li style="list-style-type:disc">For the labyrinth problem, additional factors such as dynamic obstacles or varying speeds could be considered for more complex scenarios.</li></ul><p id="a6c47ed4-b31f-4837-9861-f0d419934fce" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

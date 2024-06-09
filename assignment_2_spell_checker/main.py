@@ -12,6 +12,7 @@ from utils.timer import Timer
 def line(n=20):
     print("* "*n)
 
+
 def main():
     current_file = Path(__file__).resolve()
     current_directory = current_file.parent
