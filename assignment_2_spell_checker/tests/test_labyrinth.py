@@ -1,6 +1,7 @@
 import unittest
 from assignment_2_spell_checker.labyrinth.wizard_race import WizardRace
 
+
 class TestLabyrinth(unittest.TestCase):
     def setUp(self):
         self.labyrinth = {
@@ -20,6 +21,7 @@ class TestLabyrinth(unittest.TestCase):
     def test_wizard_race(self):
         winner = self.race.predict_winner(self.wizards, self.speeds)
         self.assertIn(winner, self.wizards)
+
 
 if __name__ == '__main__':
     unittest.main()
