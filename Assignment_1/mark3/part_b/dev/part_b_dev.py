@@ -5,11 +5,14 @@ from pathlib import Path
 
 import plotly.graph_objects as go
 
+
 def generate_text(length):
     return ''.join(random.choices(string.ascii_lowercase + string.whitespace, k=length))
 
+
 def generate_pattern(length):
     return ''.join(random.choices(string.ascii_lowercase + string.whitespace, k=length))
+
 
 # Sunday algorithm
 def sunday_search(text, pattern):
@@ -22,6 +25,7 @@ def sunday_search(text, pattern):
             return i
         i += shift.get(text[i + m], m)
     return -1
+
 
 # Gusfield Z algorithm
 def gusfield_z_search(text, pattern):
@@ -50,6 +54,7 @@ def gusfield_z_search(text, pattern):
             return i - len(pattern) - 1
     return -1
 
+
 # Knuth-Morris-Pratt algorithm
 def kmp_search(text, pattern):
     m, n = len(pattern), len(text)
@@ -70,6 +75,7 @@ def kmp_search(text, pattern):
                 i += 1
     return -1
 
+
 def compute_lps(pattern, m, lps):
     length = 0
     i = 1
@@ -84,6 +90,7 @@ def compute_lps(pattern, m, lps):
             else:
                 lps[i] = 0
                 i += 1
+
 
 # Rabin-Karp algorithm
 def rabin_karp_search(text, pattern, q=101):
@@ -105,11 +112,13 @@ def rabin_karp_search(text, pattern, q=101):
                 t += q
     return -1
 
+
 # Performance measurement
 def measure_performance(text, pattern, search_func):
     start_time = time.time()
     search_func(text, pattern)
     return time.time() - start_time
+
 
 # Generate text and patterns
 text_length = 100000
