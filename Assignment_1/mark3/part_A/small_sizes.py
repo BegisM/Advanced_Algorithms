@@ -7,7 +7,7 @@ algorithms = [
     ("Brute-force", brute_force_search),
     ("Sunday", sunday_search),
     ("KMP", kmp_search),
-    ("FSM", fsm_search),
+    # ("FSM", fsm_search),
     ("Rabin-Karp", rabin_karp_search),
     ("Gusfield Z", gusfield_z_search)
 ]

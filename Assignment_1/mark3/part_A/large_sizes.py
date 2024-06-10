@@ -7,13 +7,13 @@ algorithms = [
     ("Brute-force", brute_force_search),
     ("Sunday", sunday_search),
     ("KMP", kmp_search),
-    ("FSM", fsm_search),
+    # ("FSM", fsm_search),
     ("Rabin-Karp", rabin_karp_search),
     ("Gusfield Z", gusfield_z_search)
 ]
 
 
-text_lengths = [10_000, 50_000, 100_000, 500_000, 1_000_000]
+text_lengths = [10_000, 50_000, 100_000, 500_000]
 large_pattern = " " * 100  # Assuming space as a repeated character for simplicity
 
 
