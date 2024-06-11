@@ -1,5 +1,6 @@
 from Assignment_1.mark3.part_A.algorithms import sunday_search, kmp_search, rabin_karp_search, gusfield_z_search
-from Assignment_1.mark3.part_A.additional_funcs import measure_time, generate_text
+from Assignment_1.mark3.part_A.additional_funcs import measure_time
+from Assignment_1.mark3.test_part_b.additional_funcs import generate_large_text as generate_text
 
 specific_text_length = 100000  # 100KB
 
