@@ -65,7 +65,7 @@ def seating_scheme(guests, dislikes):
     is_bipart, coloring = is_bipartite(graph)
 
     if not is_bipart:
-        return "Невозможно рассадить гостей за два стола."
+        return "Not possible"
 
     table1 = [guest for guest in coloring if coloring[guest] == 0]
     table2 = [guest for guest in coloring if coloring[guest] == 1]
@@ -74,15 +74,14 @@ def seating_scheme(guests, dislikes):
 
 
 # Example 1
-guests = ["Анна", "Борис", "Виктор"]
-dislikes = [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Виктор")]
+guests = ["Anna", "Boris", "Viktor"]
+dislikes = [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Viktor")]
 
 res = seating_scheme(guests, dislikes)
 print("Example 1 seating arrangement:", res)
 
-# Example 2
-guests = ["Анна", "Борис", "Виктор", "Глеб"]
-dislikes = [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Глеб"), ("Виктор", "Глеб")]
+guests = ["Anna", "Boris", "Viktor", "Gleb"]
+dislikes = [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Gleb"), ("Viktor", "Gleb")]
 
 res = seating_scheme(guests, dislikes)
 print("Example 2 seating arrangement:", res)
@@ -91,8 +90,8 @@ print("Example 2 seating arrangement:", res)
 
 <p><strong>Results:</strong></p>
 <ol>
-    <li>For the first scenario with guests ["Анна", "Борис", "Виктор"] and dislikes [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Виктор")], the seating scheme divides guests into two tables: Table 1: ["Анна"], Table 2: ["Борис", "Виктор"]. This arrangement ensures that guests who dislike each other are seated separately.</li>
-    <li>For the second scenario with guests ["Анна", "Борис", "Виктор", "Глеб"] and dislikes [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Глеб"), ("Виктор", "Глеб")], the seating scheme again divides guests into two tables: Table 1: ["Анна", "Глеб"], Table 2: ["Борис", "Виктор"]. This arrangement respects the animosities among the guests.</li>
+    <li>For the first scenario with guests ["Anna", "Boris", "Viktor"] and dislikes [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Viktor")] , its impossible because everyone does not like each other</li>
+    <li>For the second scenario with guests ["Anna", "Boris", "Viktor", "Gleb"] and dislikes [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Gleb"), ("Viktor", "Gleb")], the seating scheme again divides guests into two tables: Table 1: ["Anna", "Gleb"], Table 2: ["Boris", "Viktor"]. This arrangement respects the animosities among the guests.</li>
 </ol>
 
 <p><strong>Conclusion:</strong> The implemented algorithm effectively addresses Aunt Petunia's concerns by organizing the seating arrangements in a manner that minimizes potential conflicts among guests. By leveraging a non-recursive DFS algorithm, we efficiently determine the bipartiteness of the graph and devise a logical seating scheme. This ensures Aunt Petunia's namesday celebration is a delightful and enjoyable occasion for all attendees.</p>

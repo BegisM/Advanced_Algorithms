@@ -29,7 +29,7 @@ def seating_scheme(guests, dislikes):
     is_bipart, coloring = is_bipartite(graph)
 
     if not is_bipart:
-        return "Невозможно рассадить гостей за два стола."
+        return "Not possible"
 
     table1 = [guest for guest in coloring if coloring[guest] == 0]
     table2 = [guest for guest in coloring if coloring[guest] == 1]
@@ -37,14 +37,14 @@ def seating_scheme(guests, dislikes):
     return table1, table2
 
 
-guests = ["Анна", "Борис", "Виктор"]
-dislikes = [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Виктор")]
+guests = ["Anna", "Boris", "Viktor"]
+dislikes = [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Viktor")]
 
 res = seating_scheme(guests, dislikes)
 print(res)
 
-guests = ["Анна", "Борис", "Виктор", "Глеб"]
-dislikes = [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Глеб"), ("Виктор", "Глеб")]
+guests = ["Anna", "Boris", "Viktor", "Gleb"]
+dislikes = [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Gleb"), ("Viktor", "Gleb")]
 res = seating_scheme(guests, dislikes)
 print(res)
 
