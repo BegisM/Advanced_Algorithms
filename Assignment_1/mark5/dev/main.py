@@ -45,17 +45,18 @@ def rabin_karp_2d(image, K):
     return False
 
 
-# Example usage with a dummy image
-image = [
-    [1, 2, 3, 4, 5, 6, 7, 8],
-    [9, 10, 11, 12, 13, 14, 15, 16],
-    [17, 18, 19, 20, 21, 22, 23, 24],
-    [25, 26, 27, 4, 5, 6, 7, 8],
-    [29, 30, 31, 12, 13, 14, 15, 16],
-    [33, 34, 35, 36, 37, 38, 39, 40],
-    [41, 42, 43, 20, 21, 22, 23, 24],
-    [45, 46, 47, 48, 49, 50, 51, 52]
-]
-K = 2
-found_duplicate = rabin_karp_2d(image, K)
-print("Duplicate found:", found_duplicate)
+if __name__ == '__main__':
+    # Example usage with a dummy image
+    image = [
+        [1, 2, 3, 4, 5, 6, 7, 8],
+        [9, 10, 11, 12, 13, 14, 15, 16],
+        [17, 18, 19, 20, 21, 22, 23, 24],
+        [25, 26, 27, 4, 5, 6, 7, 8],
+        [29, 30, 31, 12, 13, 14, 15, 16],
+        [33, 34, 35, 36, 37, 38, 39, 40],
+        [41, 42, 43, 20, 21, 22, 23, 24],
+        [45, 46, 47, 48, 49, 50, 51, 52]
+    ]
+    K = 2
+    found_duplicate = rabin_karp_2d(image, K)
+    print("Duplicate found:", found_duplicate)

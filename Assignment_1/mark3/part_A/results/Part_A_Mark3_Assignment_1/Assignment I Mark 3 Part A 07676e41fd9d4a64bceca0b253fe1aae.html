@@ -1,0 +1,912 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assignment I Mark 3 Part A</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="07676e41-fd9d-4a64-bcec-a0b253fe1aae" class="page sans"><header><h1 class="page-title">Assignment I Mark 3 Part A</h1><p class="page-description"></p></header><div class="page-body"><h3 id="0b85b36a-f8b3-42d9-8352-d2dbdc1fb3c0" class="">Introduction</h3><p id="4021f611-476b-4229-80f5-394ea735a09b" class="">Pattern matching is a fundamental operation in various computer science fields, including text processing, bioinformatics, and search engines. This report presents a comparative analysis of six pattern matching algorithms: Brute-force, Sunday, KMP (Knuth-Morris-Pratt), FSM (Finite State Machine), Rabin-Karp, and Gusfield Z. The goal is to compare their performance in terms of running time across different text lengths and pattern sizes.</p><ul id="eaf07097-fc93-41de-b91e-7fd542aaa34c" class="toggle"><li><details open=""><summary>Algorithms Overview</summary><ul id="75326495-e06b-40d3-be66-c83e071d9446" class="toggle"><li><details open=""><summary><strong>Brute-force Search</strong>: This algorithm checks every possible position in the text for the pattern. It is straightforward but inefficient for large texts, having a time complexity of O(n*m), where n is the length of the text and m is the length of the pattern.</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c9b66c1c-c2ee-41c9-bda1-4402fc6e2c20" class="code"><code class="language-Python">def brute_force_search(text, pattern):
+    n = len(text)
+    m = len(pattern)
+    for i in range(n - m + 1):
+        if text[i:i + m] == pattern:
+            return i
+    return -1</code></pre></details></li></ul><ul id="2e67b327-a7c8-4f92-a4e0-287c8dfeefc0" class="toggle"><li><details open=""><summary><strong>Sunday Search</strong>: Developed by Daniel M. Sunday, this algorithm improves on brute-force by skipping sections of the text. It precomputes shifts based on the character following the current match attempt, resulting in better average performance, typically O(n).</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a4be1913-97cb-4482-893d-45acb3a5700a" class="code"><code class="language-Python">def sunday_search(text, pattern):
+    n = len(text)
+    m = len(pattern)
+    if m == 0:
+        return 0
+
+    shift = {c: m + 1 for c in set(text)}
+    for i in range(m):
+        shift[pattern[i]] = m - i
+
+    i = 0
+    while i &lt;= n - m:
+        if text[i:i + m] == pattern:
+            return i
+        if i + m &gt;= n:
+            return -1
+        i += shift.get(text[i + m], m + 1)
+    return -1</code></pre></details></li></ul><ul id="996b4758-5b19-4b6d-9b9d-58d13644b0e5" class="toggle"><li><details open=""><summary><strong>Knuth-Morris-Pratt (KMP)</strong>: KMP preprocesses the pattern to create a partial match table (also known as the &quot;longest prefix suffix&quot; table). This allows the algorithm to avoid unnecessary comparisons, achieving a linear time complexity of O(n + m).</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9fc015dd-e423-4061-91bc-f579053d5c1b" class="code"><code class="language-Python">def kmp_search(text, pattern):
+    def compute_lps(pattern):
+        m = len(pattern)
+        lps = [0] * m
+        length = 0
+        i = 1
+        while i &lt; m:
+            if pattern[i] == pattern[length]:
+                length += 1
+                lps[i] = length
+                i += 1
+            else:
+                if length != 0:
+                    length = lps[length - 1]
+                else:
+                    lps[i] = 0
+                    i += 1
+        return lps
+
+    n = len(text)
+    m = len(pattern)
+    lps = compute_lps(pattern)
+    i = 0
+    j = 0
+    while i &lt; n:
+        if pattern[j] == text[i]:
+            i += 1
+            j += 1
+        if j == m:
+            return i - j
+        elif i &lt; n and pattern[j] != text[i]:
+            if j != 0:
+                j = lps[j - 1]
+            else:
+                i += 1
+    return -1
+</code></pre></details></li></ul><ul id="670a4aac-5e58-4622-a4f9-2a61773f4b5c" class="toggle"><li><details open=""><summary><strong>Finite State Machine (FSM)</strong>: This algorithm constructs a state machine for the pattern and uses it to match the text. Although efficient in theory, the preprocessing phase can be time-consuming, making it slower in practice for large texts.</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f6a876c-58a0-4258-bbc3-19a5815db502" class="code"><code class="language-Python">
+
+def fsm_search(text, pattern):
+    def compute_fsm(pattern):
+        m = len(pattern)
+        fsm = [{} for _ in range(m + 1)]
+        for state in range(m + 1):
+            for x in set(text):  # Consider all possible characters in the text
+                k = min(m, state + 1)
+                while k &gt; 0 and not pattern[:k].endswith(pattern[state - k + 1:state] + x):
+                    k -= 1
+                fsm[state][x] = k
+        return fsm
+
+    fsm = compute_fsm(pattern)
+    state = 0
+    for i, char in enumerate(text):
+        state = fsm[state].get(char, 0)
+        if state == len(pattern):
+            return i - len(pattern) + 1
+    return -1</code></pre></details></li></ul><ul id="252f2569-78c8-4214-a108-0672faab1471" class="toggle"><li><details open=""><summary><strong>Rabin-Karp</strong>: This algorithm uses hashing to compare the pattern with substrings of the text. It is particularly useful for multiple pattern matching and has an average-case time complexity of O(n + m).</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cf826eff-273f-4458-a09a-d930021dccef" class="code"><code class="language-Python">def rabin_karp_search(text, pattern, q=101):
+    d = 256
+    n = len(text)
+    m = len(pattern)
+    h = pow(d, m - 1) % q
+    p = 0
+    t = 0
+    for i in range(m):
+        p = (d * p + ord(pattern[i])) % q
+        t = (d * t + ord(text[i])) % q
+    for i in range(n - m + 1):
+        if p == t:
+            if text[i:i + m] == pattern:
+                return i
+        if i &lt; n - m:
+            t = (d * (t - ord(text[i]) * h) + ord(text[i + m])) % q
+            if t &lt; 0:
+                t = t + q
+    return -1</code></pre></details></li></ul><ul id="64e42fdb-314e-4b66-ac63-2de4021d546a" class="toggle"><li><details open=""><summary><strong>Gusfield Z</strong>: This algorithm computes a Z-array for a concatenated string of the pattern and text. It effectively finds pattern matches in linear time, O(n + m).</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1058d742-f32e-4778-9f95-8674732de58c" class="code"><code class="language-Python">def gusfield_z_search(text, pattern):
+    def compute_z(s):
+        Z = [0] * len(s)
+        L, R, K = 0, 0, 0
+        for i in range(1, len(s)):
+            if i &gt; R:
+                L, R = i, i
+                while R &lt; len(s) and s[R] == s[R - L]:
+                    R += 1
+                Z[i] = R - L
+                R -= 1
+            else:
+                K = i - L
+                if Z[K] &lt; R - i + 1:
+                    Z[i] = Z[K]
+                else:
+                    L = i
+                    while R &lt; len(s) and s[R] == s[R - L]:
+                        R += 1
+                    Z[i] = R - L
+                    R -= 1
+        return Z
+
+    concatenated = pattern + &#x27;$&#x27; + text
+    Z = compute_z(concatenated)
+    m = len(pattern)
+    for i in range(m + 1, len(concatenated)):
+        if Z[i] == m:
+            return i - m - 1
+    return -1</code></pre></details></li></ul></details></li></ul><h3 id="7d995e0a-25fc-4aa6-92f2-fabb9e6f302d" class="">Experimental Setup</h3><p id="9f7e30e1-cf5d-478d-baa3-c6467586636a" class="">The experiments were conducted using randomly generated text of varying lengths and specific patterns. The text lengths tested were from 10 to 100 (small sizes) and 10,000, 50,000, 100,000, and 500,000 (big sizes) characters. Two pattern sizes were used: a small pattern (&quot;computer&quot;) and a large pattern (a repeated paragraph).</p><h3 id="32e01613-e502-4a87-a9df-abfe698fcf69" class="">Implementation</h3><p id="d5d0ffc4-10ea-41ee-b45e-1bf05a8d7e5d" class="">Here is the code used to implement and measure the performance of the algorithms:</p><ul id="d8eb3fc3-a2e3-4a33-8758-00337408ebf7" class="toggle"><li><details open=""><summary>The implementation of the measurement functions and the plotting functions</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d1b7bad9-04e7-46ff-9484-20ec2e8d37c6" class="code"><code class="language-Python">import time
+
+
+def measure_time(algorithm, text, pattern):
+    start_time = time.time()
+    algorithm(text, pattern)
+    end_time = time.time()
+    return end_time - start_time
+    
+def generate_text(length):
+    return &#x27;&#x27;.join(random.choices(string.ascii_letters + &#x27; &#x27;, k=length))
+
+
+def run_experiments(algorithms, text_lengths, pattern):
+    results = {name: [] for name, _ in algorithms}
+
+    for length in text_lengths:
+        text = generate_text(length)
+        for name, algorithm in algorithms:
+            times = measure_time(algorithm, text, pattern)
+            results[name].append(times)
+
+    return results
+
+
+def plot_results(results, title, text_lengths, adjust_dimensions=False):
+    fig = go.Figure()
+
+    if adjust_dimensions:
+        x_label = &#x27;Text Length (thousands of characters)&#x27;
+        y_label = &#x27;Running Time (microseconds)&#x27;
+        for name, times in results.items():
+            results[name] = [t*10**6 for t in times]
+    else:
+        text_lengths = [length / 10_000 for length in text_lengths]
+        x_label = &#x27;Text Length (10 000 characters)&#x27;
+        y_label = &#x27;Running Time (seconds)&#x27;
+
+    fig.update_layout(
+        title=title,
+        xaxis_title=x_label,
+        yaxis_title=y_label,
+        plot_bgcolor=&#x27;black&#x27;,
+        paper_bgcolor=&#x27;black&#x27;,
+        legend=dict(font=dict(color=&#x27;white&#x27;))
+    )
+    fig.update_xaxes(titlefont=dict(color=&#x27;white&#x27;), tickfont=dict(color=&#x27;white&#x27;), gridcolor=&#x27;rgba(255, 255, 255, 0.2)&#x27;)
+    fig.update_yaxes(titlefont=dict(color=&#x27;white&#x27;), tickfont=dict(color=&#x27;white&#x27;), gridcolor=&#x27;rgba(255, 255, 255, 0.2)&#x27;)
+
+    # Add a line along the y-axis
+    fig.update_layout(
+        shapes=[
+            dict(
+                type=&quot;line&quot;,
+                xref=&quot;x&quot;,
+                yref=&quot;paper&quot;,
+                x0=0,
+                y0=0,
+                x1=0,
+                y1=1,
+                line=dict(color=&quot;white&quot;, width=2),
+            )
+        ]
+    )
+
+    for name, times in results.items():
+        fig.add_trace(go.Scatter(x=text_lengths, y=times, mode=&#x27;lines&#x27;, name=name))
+
+    fig.show()
+</code></pre></details></li></ul><ul id="ca9dfd5e-13a4-488a-9b43-7018250a3df2" class="toggle"><li><details open=""><summary>Results and Analysis</summary><p id="e5520e43-b242-41e0-b6f1-3d9a46f21744" class="">A small remark: During our comparisons, we found the FSM algorithm to be highly inefficient for both small and large text sizes. Therefore, we decided to exclude it from our final comparisons.</p><ul id="cecda123-b5e6-4162-b143-ccf536ec18d3" class="toggle"><li><details open=""><summary>Below are the graphs showing the comparison, including the FSM algorithm, for both small and large text sizes.</summary><p id="2157d743-7a3a-4eaa-be8c-763f4ed251b7" class="">Small sizes graph:</p><figure id="5bdcff7f-ef40-4339-9741-cfd8016302ba" class="image"><a href="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/Untitled.png"><img style="width:1904px" src="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/Untitled.png"/></a></figure><p id="988a8b9d-a8d8-478e-95a5-6f4560751066" class="">Large sizes graph:</p><figure id="405b895f-674d-4270-bb88-28ce40f262e2" class="image"><a href="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/Untitled%201.png"><img style="width:1904px" src="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/Untitled%201.png"/></a></figure></details></li></ul></details></li></ul><h3 id="cd2ad4c2-429b-4aed-af44-6bb9dc88f911" class="">Small Pattern Results</h3><p id="8a861039-bc7c-4094-b80d-4d01afcc1519" class="">For the small pattern &quot;computer&quot;, we measured the running time of each algorithm against various text lengths. The results are shown below:</p><ul id="775992c7-085f-4b16-b521-018741cccbbe" class="toggle"><li><details open=""><summary>The implementation of small pattern results code</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="de8e93c2-1ea8-416f-bd50-ebc129345611" class="code"><code class="language-Python">
+algorithms = [
+    (&quot;Brute-force&quot;, brute_force_search),
+    (&quot;Sunday&quot;, sunday_search),
+    (&quot;KMP&quot;, kmp_search),
+    (&quot;FSM&quot;, fsm_search),
+    (&quot;Rabin-Karp&quot;, rabin_karp_search),
+    (&quot;Gusfield Z&quot;, gusfield_z_search)
+]
+
+
+text_lengths = [i for i in range(10, 101, 10)]
+small_pattern = &quot;computer&quot;
+
+
+results_small = run_experiments(algorithms, text_lengths, small_pattern)
+
+for k, i in results_small.items():
+    print(f&#x27;{[x*10**6 for x in i]}&#x27;)
+
+plot_results(results_small, &#x27;Running Time vs Text Length (Small Pattern)&#x27;, text_lengths, adjust_dimensions=True)</code></pre></details></li></ul><ul id="7d8062be-4906-4e21-a51f-ea86eab81c53" class="toggle"><li><details open=""><summary>The Graph Representation of small sizes</summary><figure id="3fd6993f-8118-4dcf-b32a-5a6e7aa0f396" class="image"><a href="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/Untitled%202.png"><img style="width:1904px" src="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/Untitled%202.png"/></a></figure></details></li></ul><h3 id="e08b47f7-b03a-4e91-947a-4326d17ca72e" class="">Large Pattern Results</h3><p id="e56ee794-dd30-4863-bd65-9649bb4b8091" class="">For the large pattern, which is a repeated paragraph, we measured the running time of each algorithm against the same text lengths. The results are shown below:</p><ul id="9c163473-b164-440c-91c1-08f9c1d889ec" class="toggle"><li><details open=""><summary>The implementation of large pattern results code</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3e0e0432-f19a-4c42-bd7b-a71c89ab5117" class="code"><code class="language-Python">algorithms = [
+    (&quot;Brute-force&quot;, brute_force_search),
+    (&quot;Sunday&quot;, sunday_search),
+    (&quot;KMP&quot;, kmp_search),
+    (&quot;FSM&quot;, fsm_search),
+    (&quot;Rabin-Karp&quot;, rabin_karp_search),
+    (&quot;Gusfield Z&quot;, gusfield_z_search)
+]
+
+
+text_lengths = [10_000, 50_000, 100_000, 500_000]
+large_pattern = &quot; &quot; * 100  # Assuming space as a repeated character for simplicity
+
+
+results_large = run_experiments(algorithms, text_lengths, large_pattern)
+
+for k, i in results_large.items():
+    print(f&#x27;{i}&#x27;)
+
+plot_results(results_large, &#x27;Running Time vs Text Length (Large Pattern)&#x27;, text_lengths)
+</code></pre></details></li></ul><ul id="db061c84-600f-4dd8-9bbe-59929db2bf41" class="toggle"><li><details open=""><summary>The Graph Representation of large sizes</summary><figure id="c869ee64-0ceb-4f98-98d7-7a2af72940e9" class="image"><a href="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/large_sizes.png"><img style="width:1904px" src="Assignment%20I%20Mark%203%20Part%20A%2007676e41fd9d4a64bceca0b253fe1aae/large_sizes.png"/></a></figure></details></li></ul><h3 id="5f1fdaa4-5414-4066-935a-02ec7b7ffd15" class="">Discussion</h3><p id="ff2b5afc-db68-4c3f-91d4-cd5c1ffaa4a1" class=""><strong>Brute-force Search</strong>: As expected, the brute-force search algorithm performs poorly for both small and large patterns due to its high time complexity. It becomes increasingly inefficient as the text length increases.</p><p id="41184ff4-2572-4fce-891e-1b5b0588fad0" class=""><strong>Sunday Search</strong>: The Sunday search algorithm shows better performance than brute-force, especially for larger texts. Its ability to skip sections of the text based on character shifts makes it more efficient.</p><p id="544f2488-29fa-4e7f-91dc-f8f1b464beaa" class=""><strong>KMP (Knuth-Morris-Pratt)</strong>: The KMP algorithm performs consistently well for both small and large patterns. Its preprocessing step helps in reducing the number of comparisons, resulting in linear time complexity.</p><p id="2f25f40c-81f0-4366-af54-53f072ad486b" class=""><strong>FSM (Finite State Machine)</strong>: Although the FSM algorithm is theoretically efficient, its preprocessing phase is time-consuming, making it slower in practice, especially for large texts.</p><p id="2673ae06-aae8-453f-89e3-54871469b792" class=""><strong>Rabin-Karp</strong>: The Rabin-Karp algorithm performs well for small patterns, but its performance degrades for larger patterns due to the increased number of hash comparisons. However, it remains efficient for multiple pattern matching.</p><p id="b76543f3-3588-4a39-bdac-c4b4421cf2c6" class=""><strong>Gusfield Z</strong>: The Gusfield Z algorithm shows good performance across all scenarios. Its Z-array computation is efficient, making it a reliable choice for pattern matching.</p><h3 id="00a640bf-ef2d-4b0f-8ee9-b19ed990c00b" class="">Conclusion</h3><p id="22c9c4d7-a6a8-4ccc-ae4b-9864b94019c8" class="">From the plots, we can observe the running times of each algorithm relative to the text length. The results show that algorithms like KMP and Rabin-Karp are generally more efficient for large texts, while brute-force and FSM tend to be slower. The Sunday and Gusfield Z algorithms perform well in various scenarios, demonstrating their effectiveness for different pattern matching tasks.</p><h3 id="b8e774d1-0440-4c5b-907f-17d1b3755548" class="">Recommendations</h3><p id="4d1b6d3b-7820-4e72-a422-a716a052d83f" class="">Based on the results, we recommend using the KMP or Gusfield Z algorithms for general pattern matching tasks due to their consistent performance. The Rabin-Karp algorithm is also a good choice for scenarios involving multiple pattern matching. The Sunday algorithm can be used for moderately sized texts, while the brute-force and FSM algorithms should be avoided for large-scale applications.</p><h3 id="809185fc-10e2-4cf2-b609-e9c5ab9ec5a6" class="">Future Work</h3><p id="5036c03f-fddb-4511-9c52-eab6d1b22481" class="">Further research could involve testing these algorithms with real-world datasets and patterns of varying complexity. Additionally, exploring optimizations for the FSM algorithm&#x27;s preprocessing phase could improve its practical performance.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

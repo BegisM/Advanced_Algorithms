@@ -1,5 +1,6 @@
 from .bfs import BFS
 
+
 class WizardRace:
     def __init__(self, labyrinth, exit_position):
         self.labyrinth = labyrinth
