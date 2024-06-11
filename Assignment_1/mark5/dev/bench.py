@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
+from Assignment_1.mark5.dev.main import rabin_karp_2d
+
 
 def hash_matrix(matrix, mod=2 ** 61 - 1):
     """ Hash a KxK matrix using base hashing and bitwise operations. """
@@ -11,24 +13,6 @@ def hash_matrix(matrix, mod=2 ** 61 - 1):
         for value in row:
             hash_val = (hash_val * 257 & mod) ^ value
     return hash_val
-
-
-def rabin_karp_2d(image, K):
-    M = len(image)
-    N = len(image[0])
-    if K > M or K > N:
-        return False
-    top_right_corner = [image[i][N - K:N] for i in range(K)]
-    target_hash = hash_matrix(top_right_corner)
-    for start_row in range(M - K + 1):
-        for start_col in range(N - K + 1):
-            submatrix = [image[i][start_col:start_col + K] for i in range(start_row, start_row + K)]
-            submatrix_hash = hash_matrix(submatrix)
-            if start_row == 0 and start_col == N - K:
-                continue
-            if submatrix_hash == target_hash:
-                return True
-    return False
 
 
 # Parameters
