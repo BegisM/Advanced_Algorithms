@@ -1,16 +1,10 @@
 def is_bipartite(graph):
-    """
-    Проверяет, является ли данный граф двудольным, используя нерекурсивный алгоритм DFS.
-    :param graph: Словарь, где ключи - узлы, а значения - списки смежных узлов.
-    :return: Кортеж (bool, dict), указывающий, является ли граф двудольным и раскраску узлов.
-    """
     color = {}
     stack = []
 
     for node in graph:
         if node not in color:
-            # Начать DFS с этого узла
-            stack.append((node, 0))  # (узел, цвет)
+            stack.append((node, 0))
             while stack:
                 current, c = stack.pop()
                 if current in color:
@@ -43,10 +37,15 @@ def seating_scheme(guests, dislikes):
     return table1, table2
 
 
-guests = ["Алиса", "Боб", "Чарли", "Дэвид"]
-dislikes = [("Алиса", "Боб"), ("Алиса", "Чарли"), ("Боб", "Дэвид")]
+guests = ["Анна", "Борис", "Виктор"]
+dislikes = [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Виктор")]
 
-table1, table2 = seating_scheme(guests, dislikes)
-print("Стол 1:", table1)
-print("Стол 2:", table2)
+res = seating_scheme(guests, dislikes)
+print(res)
+
+guests = ["Анна", "Борис", "Виктор", "Глеб"]
+dislikes = [("Анна", "Борис"), ("Анна", "Виктор"), ("Борис", "Глеб"), ("Виктор", "Глеб")]
+res = seating_scheme(guests, dislikes)
+print(res)
+
 
