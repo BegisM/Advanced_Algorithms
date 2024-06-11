@@ -19,12 +19,10 @@ def is_bipartite(graph):
 
 
 def seating_scheme(guests, dislikes):
-
     graph = {guest: [] for guest in guests}
     for guest1, guest2 in dislikes:
         graph[guest1].append(guest2)
         graph[guest2].append(guest1)
-
 
     is_bipart, coloring = is_bipartite(graph)
 
@@ -35,17 +33,3 @@ def seating_scheme(guests, dislikes):
     table2 = [guest for guest in coloring if coloring[guest] == 1]
 
     return table1, table2
-
-
-guests = ["Anna", "Boris", "Viktor"]
-dislikes = [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Viktor")]
-
-res = seating_scheme(guests, dislikes)
-print(res)
-
-guests = ["Anna", "Boris", "Viktor", "Gleb"]
-dislikes = [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Gleb"), ("Viktor", "Gleb")]
-res = seating_scheme(guests, dislikes)
-print(res)
-
-

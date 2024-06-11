@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Report: Aunt's Namesday Seating Scheme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 5px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Project Report: Aunt's Namesday Seating Scheme</h1>
+
+    <h2>Introduction</h2>
+    <p>
+        Your beloved Aunt Petunia is hosting her namesday party, inviting friends and family. However, not everyone gets along swimmingly, so Aunt Petunia wants to ensure a harmonious gathering by seating guests at separate tables if they dislike each other. As her tech-savvy nephew/niece, you've been tasked with implementing a solution using a non-recursive Depth-First Search (DFS) algorithm.
+    </p>
+
+    <h2>Implementation</h2>
+    <p>
+        The project consists of two main components: seating arrangement and graph visualization.
+    </p>
+
+    <ol>
+        <li>
+            <h3>Seating Arrangement (Bipartite Graph)</h3>
+            <p>
+                The seating arrangement logic is implemented in the <code>seating_scheme</code> function within the <code>bipartite.py</code> module. This function takes a list of guests and their dislikes as input. It utilizes a non-recursive DFS algorithm to determine if the graph formed by guests and their dislikes is bipartite. If the graph is bipartite, it returns two tables with guests seated such that no two guests who dislike each other are at the same table. Otherwise, it returns "Not possible".
+            </p>
+            <pre>
+def is_bipartite(graph):
+    color = {}
+    stack = []
+
+    for node in graph:
+        if node not in color:
+            stack.append((node, 0))
+            while stack:
+                current, c = stack.pop()
+                if current in color:
+                    if color[current] != c:
+                        return False, {}
+                else:
+                    color[current] = c
+                    for neighbor in graph[current]:
+                        stack.append((neighbor, 1 - c))
+
+    return True, color
+
+
+def seating_scheme(guests, dislikes):
+    graph = {guest: [] for guest in guests}
+    for guest1, guest2 in dislikes:
+        graph[guest1].append(guest2)
+        graph[guest2].append(guest1)
+
+    is_bipart, coloring = is_bipartite(graph)
+
+    if not is_bipart:
+        return "Not possible"
+
+    table1 = [guest for guest in coloring if coloring[guest] == 0]
+    table2 = [guest for guest in coloring if coloring[guest] == 1]
+
+    return table1, table2;
+            </pre>
+        </li>
+        <li>
+            <h3>Graph Visualization</h3>
+            <p>
+                The <code>draw_graph</code> function in the <code>graph.py</code> module visualizes the guests and their dislikes using NetworkX and Matplotlib. It creates a graph where guests are nodes and dislikes are edges, and colors nodes based on their tables. The graph is then saved as an image file in the <code>output</code> directory.
+            </p>
+            <pre>
+import os
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def draw_graph(guests, dislikes, example_number, output_dir='output'):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    G = nx.Graph()
+    G.add_nodes_from(guests)
+    G.add_edges_from(dislikes)
+
+    pos = nx.spring_layout(G)
+    colors = ['lightblue' if node in guests else 'lightgreen' for node in G.nodes()]
+
+    nx.draw(G, pos, with_labels=True, node_color=colors, node_size=3000, font_size=15, font_weight='bold')
+
+    # Adjust layout
+    plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
+
+    output_path = os.path.join(output_dir, f'example{example_number}.png')
+    plt.savefig(output_path)
+    plt.close()
+    return output_path
+            </pre>
+        </li>
+    </ol>
+
+
+   <h2>Test Case Example 1</h2>
+    <p>
+        <strong>Guests:</strong> Anna, Boris, Viktor<br>
+        <strong>Dislikes:</strong> [("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Viktor")]<br>
+        <strong>Seating arrangement:</strong> Not possible (The seating arrangement is not possible because the graph is not bipartite.)
+    </p>
+
+    <img src="output/example1.png" alt="Example 1 Graph" />
+
+    <h2>Test Case Example 2</h2>
+    <p>
+        <strong>Guests:</strong> Anna, Boris, Viktor, Gleb<br>
+        <strong>Dislikes:</strong>[("Anna", "Boris"), ("Anna", "Viktor"), ("Boris", "Gleb"), ("Viktor", "Gleb")]<br>
+        <strong>Seating arrangement:</strong> Guests are seated at two tables: Table 1 (Anna, Gleb) and Table 2 (Boris, Viktor)
+    </p>
+
+    <img src="output/example2.png" alt="Example 2 Graph" />
+
+    <h2>Conclusion</h2>
+        <p>The "Aunt's Namesday" project effectively addresses the task of creating seating arrangements for guests with dislikes using a non-recursive DFS algorithm. It provides a reliable solution for ensuring a harmonious namesday party for Aunt Petunia and her guests.</p>
+
+</body>
+</html>
