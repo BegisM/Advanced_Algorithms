@@ -54,6 +54,7 @@ def main():
         'E': [],
         'F': ['E']
     }
+
     wizards = ['A', 'B', 'C']
     speeds = [1, 2, 1.5]
 

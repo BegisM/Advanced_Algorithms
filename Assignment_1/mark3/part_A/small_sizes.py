@@ -1,7 +1,7 @@
 from ploting import plot_results
 from additional_funcs import run_experiments
-from Assignment_1.mark3.algorithms import (brute_force_search, sunday_search, kmp_search, fsm_search, rabin_karp_search,
-                                           gusfield_z_search)
+from Assignment_1.mark3.part_A.algorithms import (brute_force_search, sunday_search, kmp_search, rabin_karp_search,
+                                                  gusfield_z_search)
 
 algorithms = [
     ("Brute-force", brute_force_search),

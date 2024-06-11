@@ -1,22 +1,24 @@
-def compute_initial_hash(matrix, row, col, K):
+def compute_initial_hash(matrix, row, col, K, base=256, prime=101):
     """ Compute hash for the KxK sub-matrix starting at (row, col) """
     hash_val = 0
-    for i in range(row, row + K):
-        for j in range(col, col + K):
-            hash_val ^= hash(matrix[i][j])
+    for i in range(K):
+        for j in range(K):
+            hash_val = (hash_val * base + matrix[row + i][col + j]) % prime
     return hash_val
 
 
-def update_hash(hash_val, matrix, old_row, old_col, new_row, new_col, K, vertical):
+def update_hash(hash_val, matrix, old_row, old_col, new_row, new_col, K, vertical, base=256, prime=101):
     """ Update hash value when sliding window """
     if vertical:
         for j in range(K):
-            hash_val ^= hash(matrix[old_row][old_col + j])
-            hash_val ^= hash(matrix[new_row][new_col + j])
+            # Remove the old row and add the new row
+            hash_val = (hash_val - matrix[old_row][old_col + j] * pow(base, K - 1, prime)) % prime
+            hash_val = (hash_val * base + matrix[new_row][new_col + j]) % prime
     else:
         for i in range(K):
-            hash_val ^= hash(matrix[old_row + i][old_col])
-            hash_val ^= hash(matrix[new_row + i][new_col])
+            # Remove the old column and add the new column
+            hash_val = (hash_val - matrix[old_row + i][old_col] * pow(base, K - 1, prime)) % prime
+            hash_val = (hash_val * base + matrix[new_row + i][new_col]) % prime
     return hash_val
 
 
@@ -34,25 +36,35 @@ def rabin_karp_2d(matrix, K):
     if K > M or K > N:
         return False
 
-    pattern_hash = compute_initial_hash(matrix, 0, N - K, K)
-    current_hash = 0
-    for i in range(M - K + 1):
-        if i == 0:
-            current_hash = compute_initial_hash(matrix, i, 0, K)
-        else:
-            current_hash = update_hash(current_hash, matrix, i - 1, 0, i + K - 1, 0, K, vertical=True)
+    prime = 101  # A prime number for the hash function
+    base = 256  # Base for the hash function
 
-        if current_hash == pattern_hash and is_submatrix_equal(matrix, i, 0, 0, N - K, K):
-            return True
+    pattern_hash = compute_initial_hash(matrix, 0, N - K, K, base, prime)
 
-        for j in range(1, N - K + 1):
-            current_hash = update_hash(current_hash, matrix, i, j - 1, i, j + K - 1, K, vertical=False)
+    # Set to store the hash values of sub-matrices encountered
+    hash_values = set()
 
-            if current_hash == pattern_hash and is_submatrix_equal(matrix, i, j, 0, N - K, K):
-                return True
+    # Compute initial hash values for the first row of sub-matrices
+    hash_values_row = [compute_initial_hash(matrix, i, 0, K, base, prime) for i in range(M - K + 1)]
+
+    # Check each sub-matrix in the matrix
+    for j in range(N - K + 1):
+        current_hash = hash_values_row[0]
+        for i in range(M - K + 1):
+            if current_hash in hash_values:
+                return True  # Found a duplicate sub-matrix
+            hash_values.add(current_hash)
+
+            # Update hash value for the next row
+            if i < M - K:
+                current_hash = update_hash(current_hash, matrix, i, j, i + 1, j, K, vertical=False, base=base, prime=prime)
+
+        # Update hash values for the next column of sub-matrices
+        if j < N - K:
+            for i in range(M - K + 1):
+                hash_values_row[i] = update_hash(hash_values_row[i], matrix, i, j, i, j + 1, K, vertical=True, base=base, prime=prime)
 
     return False
-
 
 # Example usage:
 
