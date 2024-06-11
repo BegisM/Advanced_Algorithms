@@ -131,6 +131,5 @@ def begis(num):
 res = begis(10000000)
 while not res[0]:
     res = begis(100000)
-    print('well')
 else:
     print(res[1], res[2], sep='\n\n\n\n')

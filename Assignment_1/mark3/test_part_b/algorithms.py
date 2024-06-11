@@ -83,3 +83,50 @@ def rabin_karp_search(text, pattern):
     return -1
 
 
+def binary_sunday_search(text, pattern):
+    n, m = len(text), len(pattern)
+    if m == 0:
+        return 0
+    shift = {pattern[i]: m - i for i in range(m)}
+    i = 0
+    while i <= n - m:
+        if text[i:i + m] == pattern:
+            return i
+        if i + m < n:
+            i += shift.get(text[i + m], m + 1)
+        else:
+            break
+    return -1
+
+
+def gusfield_z_search(text, pattern):
+    def compute_z(s):
+        Z = [0] * len(s)
+        L, R, K = 0, 0, 0
+        for i in range(1, len(s)):
+            if i > R:
+                L, R = i, i
+                while R < len(s) and s[R] == s[R - L]:
+                    R += 1
+                Z[i] = R - L
+                R -= 1
+            else:
+                K = i - L
+                if Z[K] < R - i + 1:
+                    Z[i] = Z[K]
+                else:
+                    L = i
+                    while R < len(s) and s[R] == s[R - L]:
+                        R += 1
+                    Z[i] = R - L
+                    R -= 1
+        return Z
+
+    concatenated = pattern + '$' + text
+    Z = compute_z(concatenated)
+    m = len(pattern)
+    for i in range(m + 1, len(concatenated)):
+        if Z[i] == m:
+            print(f"Gusfield Z match at index {i - m - 1}")
+            return i - m - 1
+    return -1
