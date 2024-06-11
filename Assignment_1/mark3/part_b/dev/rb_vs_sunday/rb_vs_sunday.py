@@ -19,9 +19,9 @@ while True:
     pattern = "pattern"
     """
     # Example usage:
-    pattern_length = 10
+    pattern_length = 5
     text_length = 2000
-    pattern_frequency = 50
+    pattern_frequency = 5
     text, pattern = generate_rabin_karp_test_text(pattern_length, text_length, pattern_frequency)
 
     # Measure execution time for Rabin-Karp
