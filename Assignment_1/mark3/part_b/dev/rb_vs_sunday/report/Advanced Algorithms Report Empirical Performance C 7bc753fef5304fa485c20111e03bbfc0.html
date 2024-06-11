@@ -1,0 +1,903 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Advanced Algorithms Report: Empirical Performance Comparison</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7bc753fe-f530-4fa4-85c2-0111e03bbfc0" class="page sans"><header><h1 class="page-title">Advanced Algorithms Report: Empirical Performance Comparison</h1><p class="page-description"></p></header><div class="page-body"><h3 id="1be91204-5819-425a-a0db-8932bf6db7e2" class="">1. Introduction</h3><p id="fa1e7f04-b1b5-488d-b9f3-83f5db60e80e" class="">This report presents an empirical comparison of several string matching algorithms: Binary Sunday, Gusfield Z, Knuth-Morris-Pratt (KMP), and Rabin-Karp. The goal is to demonstrate specific situations where:</p><ol type="1" id="964c3759-1907-4b9e-9267-f8ba316e26f4" class="numbered-list" start="1"><li>Binary Sunday is at least twice as fast as Gusfield Z.</li></ol><ol type="1" id="d7856317-7b2b-4a44-9e2d-f8404318e89a" class="numbered-list" start="2"><li>KMP is at least twice as fast as Rabin-Karp.</li></ol><ol type="1" id="b29dd6f7-cf85-4b42-b5ff-75d3aac5f38d" class="numbered-list" start="3"><li>Rabin-Karp is at least twice as fast as Sunday.</li></ol><h3 id="f98f7730-e16b-4425-8321-19b8b6ead662" class="">2. Algorithms Description</h3><h3 id="fe6a884b-1b0b-4f7d-ab22-99222d453103" class="">2.1 Binary Sunday Algorithm</h3><p id="247aea7c-c3e6-41e5-ae16-9ae9f6217000" class="">The Binary Sunday algorithm shifts the search window based on the characters in the pattern using a shift table. It&#x27;s known for its efficient handling of mismatches by jumping large distances, thus reducing the number of comparisons.</p><h3 id="cc532b46-8cee-4509-827a-8a75b753b29e" class="">2.2 Gusfield Z Algorithm</h3><p id="42c26c5e-95b6-4a10-88f1-dc852ee34fea" class="">The Gusfield Z algorithm builds a Z-array for the concatenation of the pattern and the text, which helps to find matches efficiently. This algorithm is particularly effective in scenarios with specific text structures.</p><h3 id="84621834-9edd-4064-b682-6382fba8cd2a" class="">2.3 Knuth-Morris-Pratt (KMP) Algorithm</h3><p id="b0e09f60-0cbb-4ceb-aa7b-16b8c9f0754f" class="">KMP preprocesses the pattern to create a longest prefix suffix (LPS) array, which allows the search phase to skip unnecessary comparisons, resulting in improved performance for certain types of text.</p><h3 id="ad67d188-1657-41ca-8458-2cdbe86473ec" class="">2.4 Rabin-Karp Algorithm</h3><p id="6023672a-bac0-4831-842e-d01cd419c2f7" class="">Rabin-Karp uses a hash function to compare the hash values of the pattern and the text&#x27;s substrings. It is particularly effective for multiple pattern matching and can be implemented simply. Its average performance is good for hashable patterns, but it can suffer from hash collisions.</p><h3 id="239b54a9-ae56-42e1-919e-da4b739317d7" class="">3. Benchmarking Setup</h3><p id="e3e4fbce-6e02-47ac-bc3e-f7c462ae9dee" class="">The benchmarking was conducted using randomly generated text of 100,000 characters and patterns of 50 characters. The performance was measured by the time taken to find the pattern in the text. The test cases aimed to ensure reproducibility and were designed to highlight the strengths and weaknesses of each algorithm.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cfea38a0-0e82-4b5d-9c32-3fd7c6b7713b" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">import time
+import random
+import string
+from pathlib import Path
+import plotly.graph_objects as go
+
+class StringSearchAlgorithms:
+    @staticmethod
+    def sunday_search(text, pattern):
+        m, n = len(pattern), len(text)
+        if m &gt; n: return -1
+        shift = {pattern[i]: m - i for i in range(m)}
+        i = 0
+        while i &lt;= n - m:
+            if text[i:i + m] == pattern:
+                return i
+            i += shift.get(text[i + m], m)
+        return -1
+
+    @staticmethod
+    def gusfield_z_search(text, pattern):
+        concat = pattern + &quot;$&quot; + text
+        Z = [0] * len(concat)
+        l, r, K = 0, 0, 0
+        for i in range(1, len(concat)):
+            if i &gt; r:
+                l, r = i, i
+                while r &lt; len(concat) and concat[r] == concat[r - l]:
+                    r += 1
+                Z[i] = r - l
+                r -= 1
+            else:
+                K = i - l
+                if Z[K] &lt; r - i + 1:
+                    Z[i] = Z[K]
+                else:
+                    l = i
+                    while r &lt; len(concat) and concat[r] == concat[r - l]:
+                        r += 1
+                    Z[i] = r - l
+                    r -= 1
+        for i in range(len(Z)):
+            if Z[i] == len(pattern):
+                return i - len(pattern) - 1
+        return -1
+
+    @staticmethod
+    def kmp_search(text, pattern):
+        def compute_lps(pattern, m, lps):
+            length = 0
+            i = 1
+            while i &lt; m:
+                if pattern[i] == pattern[length]:
+                    length += 1
+                    lps[i] = length
+                    i += 1
+                else:
+                    if length != 0:
+                        length = lps[length - 1]
+                    else:
+                        lps[i] = 0
+                        i += 1
+
+        m, n = len(pattern), len(text)
+        lps = [0] * m
+        j = 0
+        compute_lps(pattern, m, lps)
+        i = 0
+        while i &lt; n:
+            if pattern[j] == text[i]:
+                i += 1
+                j += 1
+            if j == m:
+                return i - j
+            elif i &lt; n and pattern[j] != text[i]:
+                if j != 0:
+                    j = lps[j - 1]
+                else:
+                    i += 1
+        return -1
+
+    @staticmethod
+    def rabin_karp_search(text, pattern, q=101):
+        d = 256
+        m, n = len(pattern), len(text)
+        p, t, h = 0, 0, 1
+        for i in range(m - 1):
+            h = (h * d) % q
+        for i in range(m):
+            p = (d * p + ord(pattern[i])) % q
+            t = (d * t + ord(text[i])) % q
+        for i in range(n - m + 1):
+            if p == t:
+                if text[i:i + m] == pattern:
+                    return i
+            if i &lt; n - m:
+                t = (d * (t - ord(text[i]) * h) + ord(text[i + m])) % q
+                if t &lt; 0:
+                    t += q
+        return -1
+
+class PerformanceTester:
+    def __init__(self, text_length, pattern_length):
+        self.text = self.generate_text(text_length)
+        self.pattern_length = pattern_length
+
+    @staticmethod
+    def generate_text(length):
+        return &#x27;&#x27;.join(random.choices(string.ascii_lowercase + string.whitespace, k=length))
+
+    @staticmethod
+    def generate_pattern(length):
+        return &#x27;&#x27;.join(random.choices(string.ascii_lowercase + string.whitespace, k=length))
+
+    @staticmethod
+    def measure_performance(text, pattern, search_func):
+        start_time = time.time()
+        search_func(text, pattern)
+        return time.time() - start_time
+
+    def run_tests(self):
+        pattern_sunday_vs_gusfield = self.generate_pattern(self.pattern_length)
+        pattern_kmp_vs_rk = self.generate_pattern(self.pattern_length)
+        pattern_rk_vs_sunday = self.generate_pattern(self.pattern_length)
+
+        results = {
+            &#x27;Sunday vs Gusfield Z&#x27;: (
+                self.measure_performance(self.text, pattern_sunday_vs_gusfield, StringSearchAlgorithms.sunday_search),
+                self.measure_performance(self.text, pattern_sunday_vs_gusfield, StringSearchAlgorithms.gusfield_z_search)
+            ),
+            &#x27;KMP vs Rabin-Karp&#x27;: (
+                self.measure_performance(self.text, pattern_kmp_vs_rk, StringSearchAlgorithms.kmp_search),
+                self.measure_performance(self.text, pattern_kmp_vs_rk, StringSearchAlgorithms.rabin_karp_search)
+            ),
+            &#x27;Rabin-Karp vs Sunday&#x27;: (
+                self.measure_performance(self.text, pattern_rk_vs_sunday, StringSearchAlgorithms.rabin_karp_search),
+                self.measure_performance(self.text, pattern_rk_vs_sunday, StringSearchAlgorithms.sunday_search)
+            )
+        }
+
+        return results
+
+class Plotter:
+    @staticmethod
+    def plot_results(results):
+        fig = go.Figure()
+
+        for comparison, times in results.items():
+            algs, times = zip(*[(alg, time) for alg, time in zip(comparison.split(&#x27; vs &#x27;), times)])
+            fig.add_trace(go.Bar(
+                x=list(algs),
+                y=list(times),
+                name=comparison
+            ))
+
+        fig.update_layout(
+            title=&#x27;Algorithm Performance Comparison&#x27;,
+            xaxis=dict(title=&#x27;Algorithms&#x27;),
+            yaxis=dict(title=&#x27;Time (seconds)&#x27;),
+            barmode=&#x27;group&#x27;,
+            bargap=0.15,
+            bargroupgap=0.1
+        )
+
+        current_file = Path(__file__).resolve()
+        with open(current_file.parent / &#x27;part_b.html&#x27;, &#x27;w&#x27;) as f:
+            f.write(fig.to_html())
+
+# Example usage
+if __name__ == &#x27;__main__&#x27;:
+    text_length = 100000
+    pattern_length = 50
+
+    tester = PerformanceTester(text_length, pattern_length)
+    results = tester.run_tests()
+    print(results)
+
+    Plotter.plot_results(results)
+</code></pre><h3 id="ee315088-3bcb-40b2-b902-336691984060" class="">4. Results</h3><p id="d849d594-ee31-49a4-9254-691b64b090c7" class="">The empirical results of the benchmarking tests are as follows:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="efbd0fe9-05e6-4a34-a27a-7c0053717c1e" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">{&#x27;Sunday vs Gusfield Z&#x27;: (0.016427993774414062, 0.35123467445373535),
+ &#x27;KMP vs Rabin-Karp&#x27;: (0.01234292984008789, 0.027231931686401367),
+ &#x27;Rabin-Karp vs Sunday&#x27;: (0.027459144592285156, 0.01684284210205078)}</code></pre><p id="dc184cc7-89d2-4b27-a189-a50a5b369808" class="">These times indicate the duration (in seconds) each algorithm took to find the pattern in the text.</p><h3 id="368a7362-9e07-4d00-8aa3-78da78957d10" class="">5. Analysis</h3><h3 id="1ab47b12-eb66-4018-b233-b12a8daba61c" class="">5.1 Sunday vs Gusfield Z</h3><p id="fa90832a-0abc-4f9a-beef-e1b294fe558a" class="">The Sunday algorithm performed significantly faster than the Gusfield Z algorithm, confirming the hypothesis that Sunday can be at least twice as fast in some cases.</p><figure id="e7a5447a-1f9c-4dfb-a5e7-59a58a15780a" class="image"><a href="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled.png"><img style="width:707.9971313476562px" src="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled.png"/></a></figure><h3 id="0602decb-12e3-4b5a-87f6-ded6d6d47b80" class="">5.2 KMP vs Rabin-Karp</h3><p id="32bcfbee-88f3-42b9-8846-c0fa3c17386f" class="">The KMP algorithm outperformed the Rabin-Karp algorithm, demonstrating that KMP can be at least twice as fast under certain conditions.</p><figure id="5db24c45-2cef-4c26-80a8-46d1e7f79c7b" class="image"><a href="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled%201.png"><img style="width:1454px" src="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled%201.png"/></a></figure><h3 id="7d74b392-fba8-455b-b93c-9ca5a2f02e7b" class="">5.3 Rabin-Karp vs Sunday</h3><p id="6f366c7b-5d1c-409f-b2d5-cd73b63f133c" class="">The Rabin-Karp algorithm was generally slower than the Sunday algorithm in our tests. However, we conducted an extensive search to find cases where Rabin-Karp is significantly faster. By generating specific test conditions, we were able to identify such cases.</p><figure id="81211f81-57e7-4a24-8f3e-47105ebd5800" class="image"><a href="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled%202.png"><img style="width:1454px" src="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled%202.png"/></a></figure><h3 id="2d995b2a-1879-46af-9ddd-36a7e5ac5f8c" class="">5.3.1 Efficient Multiple Pattern Matching</h3><p id="d08b9bc5-00b9-4c82-8374-e6e6deb2c9c6" class="">Rabin-Karp is effective for searching multiple patterns simultaneously, using a single hash function to compare hash values.</p><h3 id="e42129fd-f86a-40ab-8d87-57dd55992228" class="">5.3.2 Simplicity in Implementation</h3><p id="ac24ee40-b089-45d1-99b3-44d413ad2362" class="">The algorithm is relatively straightforward to implement for single pattern searches.</p><h3 id="3595a941-1403-436c-8c72-c78dd1a4dc01" class="">5.3.3 Good Average Performance</h3><p id="d6bce1fa-2482-477e-b141-82c469caef80" class="">Rabin-Karp performs well on average when the hash function distributes hash values uniformly and minimizes collisions.</p><h3 id="ce391663-a7db-4d81-8022-49b30a630dad" class="">5.3.4 Specific Test Generation</h3><p id="885f2790-ce08-418e-bb55-951adc549f3f" class="">To empirically demonstrate Rabin-Karp outperforming Sunday, we used a specialized text generation function:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ed5a171-5633-4b86-8788-c560a8eb0404" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def generate_rabin_karp_test_text(pattern_length, text_length, pattern_frequency):
+    large_alphabet = string.ascii_letters + string.digits + string.punctuation
+    pattern = &#x27;&#x27;.join(random.choices(large_alphabet, k=pattern_length))
+    text = &#x27;&#x27;.join(random.choices(large_alphabet, k=text_length))
+    positions = sorted(random.sample(range(text_length - pattern_length), pattern_frequency))
+    for pos in positions:
+        text = text[:pos] + pattern + text[pos + pattern_length:]
+    for _ in range(pattern_frequency // 2):
+        collision_seq = list(pattern)
+        random.shuffle(collision_seq)
+        collision_seq = &#x27;&#x27;.join(collision_seq)
+        pos = random.randint(0, text_length - pattern_length)
+        text = text[:pos] + collision_seq + text[pos + pattern_length:]
+    return text, pattern
+
+pattern_length = 10
+text_length = 2000
+pattern_frequency = 50
+text, pattern = generate_rabin_karp_test_text(pattern_length, text_length, pattern_frequency)
+</code></pre><h3 id="ed1beaed-b5d9-49b5-b2dd-19eac4a953e1" class="">5.3.5 Results of Specific Test</h3><p id="bca8add2-eb08-483a-8e02-d5012cfe3775" class="">Through this specific test setup, we found instances where Rabin-Karp significantly outperformed Sunday:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a274c746-2d52-41af-a8ea-14b4bda82334" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Rabin-Karp execution time: 0.00031304359436035156 seconds
+Sunday execution time: 0.0017948150634765625 seconds
+Rabin-Karp is 5.733434881949734 times faster than Sunday in this case</code></pre><p id="3f2b81d9-487f-4cf7-8bc3-358e287778b3" class="">It required 77 attempts to find a case where Rabin-Karp was faster.</p><figure id="f3004f1b-de75-48ee-9d21-0cf47fabccec" class="image"><a href="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled%203.png"><img style="width:1454px" src="Advanced%20Algorithms%20Report%20Empirical%20Performance%20C%207bc753fef5304fa485c20111e03bbfc0/Untitled%203.png"/></a></figure><p id="ba6b08fa-df62-46f9-be20-c4e8587f5a30" class="">
+</p><p id="c6f62820-aa1a-4b8d-847c-190f4f6d729e" class="">By brute force and analysis, here is an example of input data in which the algorithm outperformed sunday by at least a factor of two:</p><table id="44314efa-8a13-4f62-8bf9-a27481dba176" class="simple-table"><tbody><tr id="6299ea81-fc94-47e6-80a0-7408c6985130"><td id="~QID" class="">Pattern Length</td><td id="Wb&lt;a" class="">Text Length</td><td id="YrJi" class="">Pattern Frequency</td><td id="[AAD" class="">Rabin-Karp Execution Time (seconds)</td><td id="OfhR" class="">Sunday Execution Time (seconds)</td><td id="{Z?t" class="">Speedup (Rabin-Karp vs. Sunday)</td></tr><tr id="7459d95f-25e4-4574-b358-360fa4494b88"><td id="~QID" class="">1</td><td id="Wb&lt;a" class="">430</td><td id="YrJi" class="">184</td><td id="[AAD" class="">9.202957153320312e-05</td><td id="OfhR" class="">0.0003681182861328125</td><td id="{Z?t" class="">4.0</td></tr><tr id="c53e2d1c-9e15-4861-a961-ea9011caf01c"><td id="~QID" class="">3</td><td id="Wb&lt;a" class="">197</td><td id="YrJi" class="">6</td><td id="[AAD" class="">2.4080276489257812e-05</td><td id="OfhR" class="">7.605552673339844e-05</td><td id="{Z?t" class="">3.1584158415841586</td></tr><tr id="cdb9bb13-e403-499d-b5f7-a639d3ecdbda"><td id="~QID" class="">16</td><td id="Wb&lt;a" class="">130</td><td id="YrJi" class="">29</td><td id="[AAD" class="">4.00543212890625e-05</td><td id="OfhR" class="">0.0001499652862548828</td><td id="{Z?t" class="">3.744047619047619</td></tr><tr id="0d5ff172-c854-42c2-9919-32d929b432a9"><td id="~QID" class="">7</td><td id="Wb&lt;a" class="">405</td><td id="YrJi" class="">25</td><td id="[AAD" class="">5.125999450683594e-05</td><td id="OfhR" class="">0.00011181831359863281</td><td id="{Z?t" class="">2.181395348837209</td></tr><tr id="77809c5f-d6ea-4516-914e-8d0426bd65c7"><td id="~QID" class="">4</td><td id="Wb&lt;a" class="">688</td><td id="YrJi" class="">182</td><td id="[AAD" class="">9.512901306152344e-05</td><td id="OfhR" class="">0.0002219676971435547</td><td id="{Z?t" class="">2.3333333333333335</td></tr></tbody></table><h3 id="65953810-40eb-4c6b-9340-30b4299c7d90" class="">6. Conclusion</h3><p id="e9f9ef53-db8c-4da0-a87f-2d46d6dc2cd7" class="">The tests confirm the hypotheses for Binary Sunday and KMP algorithms but show challenges in consistently demonstrating Rabin-Karp outperforming Sunday. Specialized test generation helped identify such cases, highlighting the importance of text and pattern characteristics in performance.</p><h3 id="168dfe23-1a1c-41b9-a199-3a488c88bfaa" class="">Plotting Results</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="10c7da79-d58c-47db-bfd6-c85bae535488" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">import plotly.graph_objects as go
+
+def plot_results(results):
+    fig = go.Figure()
+
+    for comparison, times in results.items():
+        algs, times = zip(*[(alg, time) for alg, time in zip(comparison.split(&#x27; vs &#x27;), times)])
+        fig.add_trace(go.Bar(
+            x=list(algs),
+            y=list(times),
+            name=comparison
+        ))
+
+    fig.update_layout(
+        title=&#x27;Algorithm Performance Comparison&#x27;,
+        xaxis=dict(title=&#x27;Algorithms&#x27;),
+        yaxis=dict(title=&#x27;Time (seconds)&#x27;),
+        barmode=&#x27;group&#x27;,
+        bargap=0.15,
+        bargroupgap=0.1
+    )
+
+    fig.show()
+
+plot_results(results)</code></pre><p id="32c55735-2fde-4331-96cb-23b6ba336938" class="">This script generates a bar plot visualizing the performance comparisons, highlighting the speed differences between the algorithms. Further steps include refining the test patterns and text to enhance the reproducibility and consistency of the results.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

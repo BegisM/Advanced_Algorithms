@@ -127,7 +127,6 @@ def begis(num):
         return 0, None, None
 
 
-
 res = begis(10000000)
 while not res[0]:
     res = begis(100000)
